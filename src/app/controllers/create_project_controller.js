@@ -14,6 +14,7 @@ router.post('/:userId', async (req,res)=>{
 
         const project = await Project.create({ user: req.params.userId});
        
+        console.log("GOT HERE1");
         await Promise.all(devices.map(async device =>{
             const projectDevice = new Device({...device,project:project._id});
          
