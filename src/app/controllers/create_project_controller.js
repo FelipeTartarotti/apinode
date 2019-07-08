@@ -6,19 +6,20 @@ const Device = require('../models/device');
 
 router.post('/:userId', async (req,res)=>{
     try{
+        console.log("GOT HERE1");
         const {devices} = req.body;
-
+        console.log("GOT HERE2");
         if(req.userId.toString() != req.params.userId.toString()){
             return res.status(400).send({error: 'Invalid User ID '});
         }
 
-        console.log("GOT HERE1");
+        console.log("GOT HERE3");
 
         console.log(req.params.userId);
 
         const project = await Project.create({ user: req.params.userId});
        
-        console.log("GOT HERE2");
+
 
         await Promise.all(devices.map(async device =>{
             const projectDevice = new Device({...device,project:project._id});
