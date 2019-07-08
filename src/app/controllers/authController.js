@@ -22,8 +22,8 @@ router.post('/register',async (req,res)=>{
             return res.status(400).send({error: 'Esse usuário já foi utilizado'});
         }
      
-        var user = User.create(req.body);
-        console.log(user);
+        var user = await User.create(req.body);
+        
         return res.send(user);
         
     }catch(err){
