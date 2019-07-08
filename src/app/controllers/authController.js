@@ -22,11 +22,12 @@ router.post('/register',async (req,res)=>{
             return res.status(400).send({error: 'Esse usuário já foi utilizado'});
         }
      
-        const user = User.create(req.body);
+        var user = User.create(req.body);
+        console.log(user);
         return res.send(user);
         
     }catch(err){
-        return res.status(400).send({error: 'Registration failed'})
+        return res.status(400).send({error: 'Erro ao registrar usuário'})
     }
 });
 
