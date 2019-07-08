@@ -6,6 +6,7 @@ const path = require('path');
 const transport = nodemailer.createTransport({
     host,
     port,
+    secure: true,
     auth: {user,pass}
 });
 
@@ -16,4 +17,3 @@ transport.use('compile',hbs({
 }));
 
 module.exports = transport;
-

@@ -1,6 +1,6 @@
 {
-    "host": "smtp.mailtrap.io",
-    "port": "2525",
-    "user": "8e3703cd303487",
-    "pass": "900f239cfb541a"
+    "host": "smtp.googlemail.com",
+    "port": "465",
+    "user": "easy.connect.auth@gmail.com",
+    "pass": "249015123"
 }

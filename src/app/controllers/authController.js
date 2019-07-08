@@ -12,7 +12,6 @@ function generateToken(params = {}){
     return jwt.sign(params, authConfig.secret, {
         expiresIn: 86400,
     });
-
 }
 
 router.post('/register',async (req,res)=>{
@@ -24,7 +23,7 @@ router.post('/register',async (req,res)=>{
         }
      
         const user = User.create(req.body);
-        return res.send("Usuário registrado com sucesso");
+        return res.send(user.id);
         
     }catch(err){
         return res.status(400).send({error: 'Registration failed'})
@@ -62,10 +61,14 @@ router.post('/forgot_password', async (req,res)=>{
             return res.status(400).send({error: 'User not found'});
         } 
 
-        const token = crypto.randomBytes(20).toString('hex');
+        const token = crypto.randomBytes(2).toString('hex');
+
+        console.log(token);
 
         const now = new Date();
         now.setHours(now.getHours() + 1);
+
+
 
         await User.findByIdAndUpdate(user.id, {
             '$set': {
@@ -74,7 +77,7 @@ router.post('/forgot_password', async (req,res)=>{
             }
         });
 
-    
+      
         mailer.sendMail({
             to: email,
             from: "tartarotti.felipe@SpeechGrammarList.com",
@@ -82,12 +85,11 @@ router.post('/forgot_password', async (req,res)=>{
             partialsDir: 'some/path',
             context:{token},
         },(err) => {
-
             if(err)
-            return res.status(400).send({error: 'Cannot sent forgotten password'});
-
+            return res.status(400).send({error: 'Cannot send forgotten password'});
             return res.send();
         })
+
 
     }catch(err){
         console.log(err);
